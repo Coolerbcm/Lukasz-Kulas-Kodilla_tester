@@ -4,5 +4,6 @@ public class HelloWorld {
         System.out.println("Mam na imie Lukasz");
         System.out.println("Mam 33 lata");
         System.out.println("Moje nazwisko zaczyna sie na K");
+
     }
 }
