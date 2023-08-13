@@ -1,9 +1,9 @@
 public class Application
 {
 
-    private String name;
-    private double age;
-    private double height;
+    private final String name;
+    private final double age;
+    private final double height;
 
     public Application(String name, double age, double height)
     {
