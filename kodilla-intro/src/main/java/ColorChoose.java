@@ -16,16 +16,16 @@ public class ColorChoose {
 
     }
 
-    public static String ChooseColor(char letter) {
-        switch (Character.toUpperCase(letter)) {
-            case 'R': return "Red";
-            case 'O': return "Orange";
-            case 'Y': return "Yellow";
-            case 'G': return "Green";
-            case 'B': return "Blue";
-            case 'V': return "Violet";
-            case 'P': return "Pink";
-            default: return null;
-        }
+    private static String ChooseColor(char letter) {
+        return switch (Character.toUpperCase(letter)) {
+            case 'R' -> "Red";
+            case 'O' -> "Orange";
+            case 'Y' -> "Yellow";
+            case 'G' -> "Green";
+            case 'B' -> "Blue";
+            case 'V' -> "Violet";
+            case 'P' -> "Pink";
+            default -> null;
+        };
     }
 }
