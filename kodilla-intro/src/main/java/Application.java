@@ -4,6 +4,7 @@ public class Application {
         double age = 40.5;
         double height = 178;
 
-        UserValidator.validateUser(name, age, height);
+        User user = new User(name, age, height);
+        UserValidator.validateUser(user);
     }
 }
