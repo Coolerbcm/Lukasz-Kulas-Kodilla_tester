@@ -3,14 +3,14 @@ package com.kodilla.basic_assertion;
 public class Application {
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
-        int a = 8;
-        int b = 5;
+        int a = 5;
+        int b = 8;
         int sumResult = calculator.sum(a, b);
         int subResult = calculator.subtract(a, b);
         int powerResult = calculator.power(a);          // Sposób wykonania na podstawie sumy i odejmowania. [1]
         boolean correct = ResultChecker.assertEquals(13, sumResult, 0.1);
-        boolean correct2 = ResultChecker.assertEquals(3, subResult, 0.1);
-        boolean correctPower = ResultChecker.assertEquals(64, powerResult, 0.1);     // Sposób wykonania na podstawie sumy i odejmowania. [1]
+        boolean correct2 = ResultChecker.assertEquals(-3, subResult, 0.1);
+        boolean correctPower = ResultChecker.assertEquals(25, powerResult, 0.1);     // Sposób wykonania na podstawie sumy i odejmowania. [1]
 
 
         // Poniżej sposób wykonania z podpowiedzi zadania 3.5  [2]
