@@ -5,10 +5,12 @@ public class Application {
         Calculator calculator = new Calculator();
         int a = 8;
         int b = 5;
-        int sumResult = calculator.subtract(a, b);
+        int sumResult = calculator.sum(a, b);
+        int subResult = calculator.subtract(a, b);
         int powerResult = calculator.power(a);          // Sposób wykonania na podstawie sumy i odejmowania. [1]
-        boolean correct = ResultChecker.assertEquals(3, sumResult);
-        boolean correctPower = ResultChecker.assertEquals(64, powerResult);     // Sposób wykonania na podstawie sumy i odejmowania. [1]
+        boolean correct = ResultChecker.assertEquals(13, sumResult, 0.1);
+        boolean correct2 = ResultChecker.assertEquals(3, subResult, 0.1);
+        boolean correctPower = ResultChecker.assertEquals(64, powerResult, 0.1);     // Sposób wykonania na podstawie sumy i odejmowania. [1]
 
 
         // Poniżej sposób wykonania z podpowiedzi zadania 3.5  [2]
@@ -20,6 +22,13 @@ public class Application {
 
 
         if (correct) {
+            System.out.println("Metoda sum działa poprawnie dla liczb :  " + a + " i " + b);
+
+        } else {
+            System.out.println("Metoda sum nie działa poprawnie dla liczb :  " + a + " i " + b);
+        }
+
+        if (correct2) {
             System.out.println("Metoda subtract działa poprawnie dla liczb :  " + a + " i " + b);
 
         } else {
