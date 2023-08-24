@@ -6,10 +6,12 @@ public class CarsApplication {
     public static Car drawCar() {
         Random random = new Random();
         String[] makers = {"Toyota", "Honda", "Ford", "Chevrolet", "BMW", "Mercedes", "Volvo", "Saab"};
-        String[] models = {"Corolla", "Civic", "F-150", "Suburban", "F90", "W190", "V90", "9-3"};
         int randomMakerIndex = random.nextInt(makers.length);
+
+        String[] models = {"Corolla", "Civic", "F-150", "Suburban", "F90", "W190", "V90", "9-3"};
         int randomModelIndex = random.nextInt(models.length);
-        int year = 2000 + random.nextInt(23);
+
+        int year = 2000 + random.nextInt(24);
 
         String[] colors = {"Red", "Blue", "Green", "White", "Black", "Orange", "Yellow", "Grey"};
         String color = colors[random.nextInt(colors.length)];
