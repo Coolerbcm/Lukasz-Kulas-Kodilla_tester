@@ -17,5 +17,4 @@ class WarehouseTest {
         // then
         assertThrows(OrderDoesntExistException.class, ()->warehouse.getOrder("1"));
     }
-
 }
