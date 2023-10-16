@@ -14,8 +14,8 @@ public class ShippingCenterTest {
     public void shouldCheckPackageWeight(){
         ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring.basic");
         DeliveryService bean = context.getBean(DeliveryService.class);
-        String weight = String.valueOf(bean.deliverPackage("New York", 30));
-        Assertions.assertTrue(true, weight);
+        boolean weight = bean.deliverPackage("New York", 30);
+        Assertions.assertEquals(true, weight);
     }
 
     @Test
@@ -33,5 +33,4 @@ public class ShippingCenterTest {
         String address = bean.success("New York");
         Assertions.assertNotNull(address);
     }
-
 }
