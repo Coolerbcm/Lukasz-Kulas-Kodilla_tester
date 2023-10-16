@@ -14,7 +14,7 @@ public class Application {
 
 
         // Poniżej sposób wykonania z podpowiedzi zadania 3.5  [2]
-        int liczbaCalkowita = 8;
+        int liczbaCalkowita = 5;
         int potega = 2;
         double wynik = Math.pow(liczbaCalkowita, potega);
         System.out.println(liczbaCalkowita + " do potęgi " + potega + " = " + wynik);

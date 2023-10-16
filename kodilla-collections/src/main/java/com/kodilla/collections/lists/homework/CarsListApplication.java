@@ -19,7 +19,9 @@ public class CarsListApplication {
         cars.add(new Car("Honda", "Accord", 2010, "Silver", "Sedan", "Gasoline"));
         cars.add(new Car("Toyota", "Corolla", 2020, "White", "Hatchback", "Diesel"));
         cars.add(new Car("Mercedes", "W201", 1990, "Silver", "Wagon", "Diesel"));
-
+        for (Car car : cars) {
+            CarUtils.describeCar(car);
+        }
         System.out.println("Number of cars in the list: " + cars.size() +  " <-- before removal");
 
         cars.remove(5);
@@ -27,9 +29,7 @@ public class CarsListApplication {
 
         cars.remove(hyundai);
         System.out.println("Number of cars in the list: " + cars.size() + " <-- After using remove(object o) ");
-        for (Car car : cars) {
-            CarUtils.describeCar(car);
-        }
+
     }
 }
 

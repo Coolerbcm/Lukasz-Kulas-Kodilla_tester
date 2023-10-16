@@ -1,15 +1,15 @@
-package com.kodilla.homework;
+ package com.kodilla.homework;
 
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+ import org.junit.jupiter.api.Test;
+ import org.mockito.Mockito;
 
-import static org.mockito.Mockito.verify;
+ import static org.mockito.Mockito.verify;
 
 class WeatherAlertsTest {
 
 
-    WeatherAlerts weatherAlerts = Mockito.mock(WeatherAlerts.class);
-    UserLocation Madrid = Mockito.mock(UserLocation.class);
+    WeatherAlerts weatherAlerts = new WeatherAlerts();
+    UserLocation madrid = Mockito.mock(UserLocation.class);
     UserLocation Lisboa = Mockito.mock(UserLocation.class);
 
     WeatherSubscriber subscriberMatt = Mockito.mock(WeatherSubscriber.class);
@@ -20,58 +20,74 @@ class WeatherAlertsTest {
     @Test
     void shouldSendNotificationToLocationSubscribers() {
 
-        Madrid.subscribe(subscriberMatt);
-        Madrid.subscribe(subscriberWalter);
+        weatherAlerts.subscribe(madrid, subscriberWalter);
+        weatherAlerts.subscribe(madrid, subscriberMatt);
 
-        weatherAlerts.registerLocation(Madrid);
-        weatherAlerts.sendNotificationToLocation(Madrid, "Weather alert, strong wind.");
+        weatherAlerts.sendNotificationToLocation(madrid, "Weather alert, strong wind.");
 
-        verify(Madrid, Mockito.times(2)).subscribe(Mockito.any());
+        verify(subscriberWalter, Mockito.times(1)).notify(Mockito.any());
+        verify(subscriberMatt, Mockito.times(1)).notify(Mockito.any());
     }
 
-    @Test
-    void shouldSendNotificationToAllSubscribers() {
 
-        Madrid.subscribe(subscriberMatt);
-        Madrid.subscribe(subscriberWalter);
-        Lisboa.subscribe(subscriberMack);
 
-        weatherAlerts.registerLocation(Madrid);
-        weatherAlerts.registerLocation(Lisboa);
-        weatherAlerts.sendNotificationToAll("Weather alert: Strong rain in your area !");
 
-        verify(weatherAlerts, Mockito.times(1));
-    }
 
-    @Test
-    void shouldUnsubscribeFromLocation() {
+    // Do przerobienia wszystkie pozostale, na wzor powyzszego. //
+    // Do przerobienia wszystkie pozostale, na wzor powyzszego. //
+    // Do przerobienia wszystkie pozostale, na wzor powyzszego. //
+    // Do przerobienia wszystkie pozostale, na wzor powyzszego. //
 
-        Madrid.subscribe(subscriberMatt);
-        Madrid.subscribe(subscriberWalter);
 
-        weatherAlerts.registerLocation(Madrid);
-        weatherAlerts.sendNotificationToLocation(Madrid, "Weather alert, strong wind.");
-
-        Madrid.unsubscribe(subscriberMatt);
-
-        verify(Madrid, Mockito.times(1));
-    }
-
-    @Test
-    void shouldUnsubscribeFromAllLocations() {
-
-        Madrid.subscribe(subscriberMatt);
-        Madrid.subscribe(subscriberWalter);
-        Lisboa.subscribe(subscriberMack);
-
-        weatherAlerts.registerLocation(Madrid);
-        weatherAlerts.registerLocation(Lisboa);
-        weatherAlerts.sendNotificationToAll("Weather alert, strong wind !");
-
-        Madrid.unsubscribeAll();
-        Lisboa.unsubscribeAll();
-        weatherAlerts.sendNotificationToAll("Weather alert, strong wind !");
-
-        verify(weatherAlerts, Mockito.times(0));
-    }
+//    @Test
+//    void shouldSendNotificationToAllSubscribers() {
+//
+//        madrid.subscribe(subscriberMatt);
+//        madrid.subscribe(subscriberWalter);
+//        Lisboa.subscribe(subscriberMack);
+//
+//        weatherAlerts.registerLocation(madrid);
+//        weatherAlerts.registerLocation(Lisboa);
+//        weatherAlerts.sendNotificationToAll("Weather alert: Strong rain in your area !");
+//
+//        verify(subscriberMatt, Mockito.times(1)).notify(any());
+//        verify(subscriberWalter, Mockito.times(1)).notify(any());
+//        verify(subscriberMack, Mockito.times(1)).notify(any());
+//    }
+//
+//    @Test
+//    void shouldUnsubscribeFromLocation() {
+//
+//        madrid.subscribe(subscriberMatt);
+//        madrid.subscribe(subscriberWalter);
+//
+//        weatherAlerts.registerLocation(madrid);
+//        weatherAlerts.sendNotificationToLocation(madrid, "Weather alert, strong wind.");
+//
+//        madrid.unsubscribe(subscriberMatt);
+//
+//        verify(madrid, Mockito.times(1));
+//    }
+//
+//    @Test
+//    void shouldUnsubscribeFromAllLocations() {
+//
+//        madrid.subscribe(subscriberMatt);
+//        madrid.subscribe(subscriberWalter);
+//        Lisboa.subscribe(subscriberMack);
+//
+//        weatherAlerts.registerLocation(madrid);
+//        weatherAlerts.registerLocation(Lisboa);
+//        weatherAlerts.sendNotificationToAll("Weather alert, strong wind !");
+//
+//        madrid.unsubscribeAll();
+//        Lisboa.unsubscribeAll();
+//        weatherAlerts.sendNotificationToAll("Weather alert, strong wind !");
+//
+//        verify(subscriberMatt, Mockito.times(0)).notify(any());
+//        verify(subscriberWalter, Mockito.times(0)).notify(any());
+//        verify(subscriberMack, Mockito.times(0)).notify(any());
+//    }
 }
+
+

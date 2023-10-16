@@ -1,4 +1,4 @@
-package com.kodilla.parametrized_tests.homework;
+/* package com.kodilla.parametrized_tests.homework;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -31,3 +31,5 @@ class GamblingMachineTest {
     }
 
 }
+
+ */

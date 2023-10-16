@@ -8,9 +8,18 @@ import java.util.Set;
 public class WeatherAlerts {
     private Map<UserLocation, Set<WeatherSubscriber>> subscriptions = new HashMap<>();
 
-    public void registerLocation(UserLocation location){
-        subscriptions.put(location, new HashSet<>());
+    public void subscribe(UserLocation location, WeatherSubscriber subscriber) {
+        Set<WeatherSubscriber> currentSubscribers = subscriptions.getOrDefault(location, new HashSet<>());
+        currentSubscribers.add(subscriber);
+        subscriptions.put(location, currentSubscribers);
     }
+
+    public void unSubscribe(UserLocation location, WeatherSubscriber subscriber) {
+        Set<WeatherSubscriber> currentSubscribers = subscriptions.get(location);
+        currentSubscribers.remove(subscriber);
+        subscriptions.put(location, currentSubscribers);
+    }
+
 
 
     public void sendNotificationToLocation(UserLocation location, String message){
