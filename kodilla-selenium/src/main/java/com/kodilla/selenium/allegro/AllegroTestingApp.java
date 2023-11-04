@@ -6,26 +6,43 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class AllegroTestingApp {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         System.setProperty("webdriver.chrome.driver", "C:\\Windows\\selenium-drivers\\Chrome\\chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*");
         WebDriver driver = new ChromeDriver(chromeOptions);
+        WebDriverWait wait = new WebDriverWait(driver, 5);
         driver.get("https://allegro.pl/");
 
-        WebElement chooseCategory = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[3]/header/div[1]/div/div/div/form/div[3]/div/select"));
+        Thread.sleep(2335);
+        WebElement decline = driver.findElement(By.cssSelector("[data-role='reject-rodo']"));
+        decline.click();
+
+        Thread.sleep(3634);
+        WebElement chooseCategory = driver.findElement(By.cssSelector("select[data-role='filters-dropdown-toggle']"));
         Select category = new Select(chooseCategory);
         category.selectByIndex(3);
 
-        WebElement decline = driver.findElement(By.xpath("//*[@id=\"opbox-gdpr-consents-modal\"]/div/div[2]/div/div[2]/button[2]"));
-        decline.click();
-
-        WebElement productField = driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div/div[3]/header/div[1]/div/div/div/form/input"));
+        Thread.sleep(4213);
+        WebElement productField = driver.findElement(By.cssSelector("[data-role='search-input']"));
         productField.sendKeys("mavic mini");
         productField.submit();
+        Thread.sleep(4543);
+
+        List<WebElement> elements = driver.findElements(By.cssSelector("section > article"));
+         if (!elements.isEmpty()) {
+             WebElement element = elements.get(0);
+             String productInfo = element.getText();
+             System.out.println("Product information: " + productInfo);
+             } else {
+             System.out.println("List is empty");
+         }
     }
 }
