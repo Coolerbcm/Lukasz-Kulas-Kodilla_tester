@@ -19,9 +19,6 @@ public class KodillaStoreSearch {
     public KodillaStoreSearch(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
-
-
-
     public boolean numberOfResultIsEqualTo(int length) {
         return length == elements.size();
     }

@@ -6,7 +6,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class KodillaStorePom {
     public static void main(String[] args) {
-
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*");
