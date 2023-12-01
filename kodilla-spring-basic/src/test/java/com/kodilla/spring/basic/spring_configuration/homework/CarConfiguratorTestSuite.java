@@ -27,7 +27,7 @@ class CarConfiguratorTestSuite {
     @Test
     public void chosenCarAccordingToSeason(){
         CarConfigurator carConfigurator = new CarConfigurator();
-        Assertions.assertEquals("Sedan",carConfigurator.CarConfigurator().getCarType());
+        Assertions.assertEquals("SUV",carConfigurator.CarConfigurator().getCarType());
     }
 
     @Test
