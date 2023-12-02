@@ -7,8 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testcontainers.containers.BrowserWebDriverContainer;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.Network;
@@ -17,10 +15,9 @@ import org.testcontainers.shaded.org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.Duration;
 
 import static org.junit.Assert.assertEquals;
-import static org.testcontainers.containers.BrowserWebDriverContainer.VncRecordingMode.SKIP;
+import static org.testcontainers.containers.BrowserWebDriverContainer.VncRecordingMode.RECORD_ALL;
 
 @ExtendWith(NetworkExtension.class)
 public class ApplicationTest {
@@ -28,9 +25,10 @@ public class ApplicationTest {
     public Network network;
     public GenericContainer webServer;
     public BrowserWebDriverContainer chrome;
+    public BrowserWebDriverContainer firefox;
 
     @BeforeEach
-    public void init() {
+    public void init() throws InterruptedException {
 
         network = Network.newNetwork();
 
@@ -40,35 +38,39 @@ public class ApplicationTest {
                                 .withFileFromClasspath("/tmp/index.html", "index.html")
                                 .withDockerfileFromBuilder(builder ->
                                         builder
-                                                .from("httpd:2.4")
+                                                .from("httpd:2.2")
                                                 .copy("/tmp/index.html", "/usr/local/apache2/htdocs")
                                                 .build()))
                         .withNetwork(network)
                         .withNetworkAliases("my-server")
                         .withExposedPorts(80);
+        webServer.start();
+        Thread.sleep(20000);
 
         chrome =
                 new BrowserWebDriverContainer<>()
                         .withNetwork(network)
-                        .withRecordingMode(SKIP, null)
+                        .withRecordingMode(RECORD_ALL, new File("./build/"))
                         .withCapabilities(new ChromeOptions());
+
+//        firefox =
+//                new BrowserWebDriverContainer()
+//                        .withCapabilities(new FirefoxOptions())
+//                        .withRecordingMode(RECORD_ALL, new File("./build/"))
+//                        .withRecordingFileFactory(new DefaultRecordingFileFactory());
     }
     @Test
     public void customImageTest() throws IOException, InterruptedException {
-//        Thread.sleep(120000);
+        chrome.start();
+//        firefox.start();
+
         RemoteWebDriver driver = chrome.getWebDriver();
+            driver.get("http://my-server/");
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-        wait.until(ExpectedConditions.urlToBe("http://localhost:" + chrome.getMappedPort(80) + "/wd/hub"));
+            File screenshot = driver.getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(screenshot, new File("./build/screenshots/" + screenshot.getName()));
 
-        driver.get("http://my-server/");
-
-
-
-        File screenshot = driver.getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(screenshot, new File("./build/screenshots/" + screenshot.getName()));
-
-        String title = driver.findElement(By.id("title")).getText();
-        assertEquals("My dockerized web page.", title);
-    }
+            String title = driver.findElement(By.id("title")).getText();
+            assertEquals("My business card.", title);
+        }
 }
